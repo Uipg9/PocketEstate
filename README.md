@@ -18,6 +18,9 @@ We believe mod GUIs shouldn't look like spreadsheets. Pocket Estate utilizes exi
 
 Manage your crops in a grid-based plot system:
 
+- **54 Plots Available**: Unlock up to 54 crop plots across 6 pages
+- **Pagination System**: Navigate between pages of plots easily
+- **Affordable Unlocks**: Progressive pricing from free to 55,000 coins
 - **Visual Growth**: Crops display growth progress with progress bars
 - **Universal Compatibility**: Supports Wheat, Carrots, Potatoes, Beetroots, Melons, Pumpkins, and Nether Wart
 - **One-Click Farming**: Harvest and Replant buttons automate the drudgery
@@ -27,17 +30,19 @@ Manage your crops in a grid-based plot system:
 Construct virtual pens to farm passive and hostile mobs safely from your base:
 
 **The Pasture:**
-- Sheep (Wool/Mutton) - Requires Shears for wool, Sword for meat
-- Cows (Leather/Beef) - Requires Sword
-- Chickens (Feathers/Eggs/Chicken) - Eggs produced automatically
+- Sheep (Wool/Mutton) - Just feed them!
+- Cows (Leather/Beef) - Just feed them!
+- Chickens (Feathers/Eggs/Chicken) - Just feed them!
 
 **The Dungeon:**
-- Spiders (String/Spider Eyes)
-- Zombies (Rotten Flesh/Iron Ingots)
-- Skeletons (Bones/Arrows)
+- Spiders (String/Spider Eyes) - Fully automated!
+- Zombies (Rotten Flesh/Iron Ingots) - Fully automated!
+- Skeletons (Bones/Arrows) - Fully automated!
 
 **The Foundry:**
 - Iron Golems (Iron Ingots/Poppies) - Requires 4 Iron Blocks to construct
+
+> **Note:** Tools are no longer required! All production is automatic once you provide fodder.
 
 ### 💰 Sell Resources for Money
 
@@ -56,19 +61,12 @@ Works **standalone** OR integrates with external economy mods:
 - **Custom Mods** - Implement `EconomyProvider` interface
 - **Standalone Mode** - Uses internal balance when no economy mod present
 
-### 🛠️ Resource Requirements
-
-Mobs aren't free!
+### 🛠️ Simple Resource System
 
 - **Living Mobs** require Fodder (Wheat/Seeds) to produce resources
 - **Hostile Mobs** require Trophies (Rotten Flesh, Bones) to maintain spawn rates
 - **Iron Golems** require a one-time investment of Iron Blocks
-
-### 🔧 Tool Slots
-
-- Insert **Shears** into a Sheep Pen to generate Wool
-- Insert a **Sword** to generate loot drops
-- **Durability is consumed** just like real usage!
+- **No Tools Required** - All production is automated!
 
 ## 🚀 Getting Started
 
@@ -94,15 +92,14 @@ Mobs aren't free!
 |---------|-------------|
 | `/estate` | Opens the Estate GUI |
 | `/pe` | Alias for `/estate` |
-| `/sell` | Opens the Sell GUI |
 | `/estate give` | Gives you an Estate Ledger |
 | `/estate balance` | Shows your current balance |
 | `/estate sell` | Opens the Sell GUI |
 | `/estate sellall` | Quick sell all resources |
 | `/estate stats` | Shows estate statistics |
 | `/estate help` | Shows help information |
-| `/estate addmoney <amount>` | (OP) Adds money |
-| `/estate setmoney <amount>` | (OP) Sets balance |
+| `/estate addmoney <amount>` | (OP only) Adds money |
+| `/estate setmoney <amount>` | (OP only) Sets balance |
 
 ## ⚙️ Configuration
 

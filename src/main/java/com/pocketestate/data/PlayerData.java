@@ -27,9 +27,12 @@ public class PlayerData {
     // Output buffers for collecting resources
     private final List<ItemStack> outputBuffer = new ArrayList<>();
     
+    // Maximum number of crop plots (6 pages of 9)
+    public static final int MAX_CROP_PLOTS = 54;
+    
     public PlayerData() {
-        // Initialize 9 empty crop plots
-        for (int i = 0; i < 9; i++) {
+        // Initialize 54 empty crop plots (6 pages of 9)
+        for (int i = 0; i < MAX_CROP_PLOTS; i++) {
             cropPlots.add(new CropPlot());
         }
     }
@@ -48,7 +51,7 @@ public class PlayerData {
     }
     
     public int getUnlockedCropSlots() { return unlockedCropSlots; }
-    public void setUnlockedCropSlots(int slots) { this.unlockedCropSlots = Math.min(9, slots); }
+    public void setUnlockedCropSlots(int slots) { this.unlockedCropSlots = Math.min(MAX_CROP_PLOTS, slots); }
     
     public boolean isCropSlotUnlocked(int index) {
         return index < unlockedCropSlots;
@@ -140,14 +143,11 @@ public class PlayerData {
         // Load crop plots
         if (tag.contains("cropPlots")) {
             ListTag cropsTag = tag.getList("cropPlots").orElse(new ListTag());
-            for (int i = 0; i < Math.min(cropsTag.size(), 9); i++) {
+            for (int i = 0; i < Math.min(cropsTag.size(), MAX_CROP_PLOTS); i++) {
+                final int slotIndex = i;
                 cropsTag.getCompound(i).ifPresent(plotTag -> {
-                    // Add to first available slot
-                    for (int j = 0; j < 9; j++) {
-                        if (data.cropPlots.get(j) == null) {
-                            data.cropPlots.set(j, CropPlot.fromNBT(plotTag));
-                            break;
-                        }
+                    if (slotIndex < data.cropPlots.size()) {
+                        data.cropPlots.set(slotIndex, CropPlot.fromNBT(plotTag));
                     }
                 });
             }

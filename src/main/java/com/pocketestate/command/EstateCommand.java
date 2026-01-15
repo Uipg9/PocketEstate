@@ -221,15 +221,6 @@ public class EstateCommand {
                 return 1;
             })
         );
-        
-        // Alias: /sell for quick selling
-        dispatcher.register(Commands.literal("sell")
-            .executes(context -> {
-                ServerPlayer player = context.getSource().getPlayerOrException();
-                SellGui.openFor(player);
-                return 1;
-            })
-        );
     }
     
     /**

@@ -10,38 +10,38 @@ import java.util.List;
  * Types of mob pens available in the virtual menagerie
  */
 public enum PenType {
-    // Passive mobs - The Pasture
+    // Passive mobs - The Pasture (tools no longer required - included in price!)
     SHEEP("Sheep Pasture", Category.PASTURE, EntityType.SHEEP, 
           5000, Items.WHEAT, 10,
-          List.of(new LootEntry(Items.WHITE_WOOL, 1, 3, Items.SHEARS, false),
-                  new LootEntry(Items.MUTTON, 1, 2, Items.IRON_SWORD, true))),
+          List.of(new LootEntry(Items.WHITE_WOOL, 1, 3, null, false),
+                  new LootEntry(Items.MUTTON, 1, 2, null, false))),
     
     COW("Cattle Ranch", Category.PASTURE, EntityType.COW,
         7500, Items.WHEAT, 10,
-        List.of(new LootEntry(Items.LEATHER, 1, 2, Items.IRON_SWORD, true),
-                new LootEntry(Items.BEEF, 1, 3, Items.IRON_SWORD, true))),
+        List.of(new LootEntry(Items.LEATHER, 1, 2, null, false),
+                new LootEntry(Items.BEEF, 1, 3, null, false))),
     
     CHICKEN("Chicken Coop", Category.PASTURE, EntityType.CHICKEN,
             3000, Items.WHEAT_SEEDS, 5,
-            List.of(new LootEntry(Items.FEATHER, 0, 2, Items.IRON_SWORD, true),
-                    new LootEntry(Items.CHICKEN, 1, 1, Items.IRON_SWORD, true),
+            List.of(new LootEntry(Items.FEATHER, 0, 2, null, false),
+                    new LootEntry(Items.CHICKEN, 1, 1, null, false),
                     new LootEntry(Items.EGG, 1, 1, null, false))),
     
-    // Hostile mobs - The Dungeon
+    // Hostile mobs - The Dungeon (tools no longer required - included in price!)
     SPIDER("Spider Dungeon", Category.DUNGEON, EntityType.SPIDER,
            10000, Items.ROTTEN_FLESH, 20,
-           List.of(new LootEntry(Items.STRING, 0, 2, Items.IRON_SWORD, true),
-                   new LootEntry(Items.SPIDER_EYE, 0, 1, Items.IRON_SWORD, true))),
+           List.of(new LootEntry(Items.STRING, 0, 2, null, false),
+                   new LootEntry(Items.SPIDER_EYE, 0, 1, null, false))),
     
     ZOMBIE("Zombie Dungeon", Category.DUNGEON, EntityType.ZOMBIE,
            10000, Items.ROTTEN_FLESH, 20,
-           List.of(new LootEntry(Items.ROTTEN_FLESH, 0, 2, Items.IRON_SWORD, true),
-                   new LootEntry(Items.IRON_INGOT, 0, 1, Items.IRON_SWORD, true))),
+           List.of(new LootEntry(Items.ROTTEN_FLESH, 0, 2, null, false),
+                   new LootEntry(Items.IRON_INGOT, 0, 1, null, false))),
     
     SKELETON("Skeleton Dungeon", Category.DUNGEON, EntityType.SKELETON,
              12000, Items.BONE, 25,
-             List.of(new LootEntry(Items.BONE, 0, 2, Items.IRON_SWORD, true),
-                     new LootEntry(Items.ARROW, 0, 2, Items.IRON_SWORD, true))),
+             List.of(new LootEntry(Items.BONE, 0, 2, null, false),
+                     new LootEntry(Items.ARROW, 0, 2, null, false))),
     
     // Special - The Foundry
     IRON_GOLEM("Iron Foundry", Category.FOUNDRY, EntityType.IRON_GOLEM,

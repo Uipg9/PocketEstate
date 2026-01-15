@@ -9,6 +9,9 @@ This folder contains **universal** documentation for developing Fabric mods for 
 - **[API_CHANGES_1.21.md](API_CHANGES_1.21.md)** - Important API changes from 1.20.x to 1.21.x
 - **[VERSION_NOTICE.md](VERSION_NOTICE.md)** - Version compatibility information
 
+## Lessons Learned
+- **[LESSONS_LEARNED_POCKETESTATE.md](LESSONS_LEARNED_POCKETESTATE.md)** - Real-world lessons from Pocket Estate mod development
+
 ## Troubleshooting
 - **[TROUBLESHOOTING_CHEAT_SHEET.md](TROUBLESHOOTING_CHEAT_SHEET.md)** - Common issues and solutions for any mod
 
