@@ -11,19 +11,40 @@ Designed for builders who want resources without the lag of hundreds of entities
 We believe mod GUIs shouldn't look like spreadsheets. Pocket Estate utilizes existing game assets to create an immersive "dashboard":
 
 - **Immersive Tabs**: Navigate between "Fields" (Crops), "Pens" (Mobs), and "Sell" tabs
-- **Entity Rendering**: Mini-mobs rendered in their slots (concept prepared for client-side implementation)
+- **Full-Screen Farm GUI**: View 21 crop plots at once (7x3 grid) with pagination
 - **Vanilla Textures**: Built using the standard vanilla palette (Oak Planks, Stone Bricks, Dark UI slots)
+- **Glow Effects**: Ready crops and available actions glow to attract attention
 
-### 🌾 The Virtual Garden
+### 🌾 The Virtual Garden (v1.2.0 Redesign!)
 
-Manage your crops in a grid-based plot system:
+Manage your crops in a redesigned full-screen farm system with idle-game mechanics:
 
-- **54 Plots Available**: Unlock up to 54 crop plots across 6 pages
-- **Pagination System**: Navigate between pages of plots easily
-- **Affordable Unlocks**: Progressive pricing from free to 55,000 coins
-- **Visual Growth**: Crops display growth progress with progress bars
-- **Universal Compatibility**: Supports Wheat, Carrots, Potatoes, Beetroots, Melons, Pumpkins, and Nether Wart
-- **One-Click Farming**: Harvest and Replant buttons automate the drudgery
+- **180 Plots Available**: Unlock up to 180 crop plots for massive farming!
+- **Full-Screen Layout**: View 21 plots at once in a 7x3 grid with pagination
+- **Idle-Game Mechanics**: XP and money rewards for every harvest!
+- **Plant All Button**: Select a crop type and plant in all empty plots at once
+- **Harvest All Button**: Harvest all ready crops with one click
+- **Bonemeal Boost**: Store bonemeal and boost all growing crops by 25%
+  - Left-click to use stored bonemeal
+  - Right-click to add bonemeal from your inventory
+- **Compost Bin**: Passive bonemeal production over time
+  - Add crops from your output to speed up compost production
+- **Buy Plots**: Purchase new plots with in-game currency
+  - Left-click: Buy 1 plot
+  - Right-click: Buy 5 plots at once
+- **Auto-Harvest Toggle**: Automatically harvest ready crops!
+- **Crop Output Buffer**: Harvested crops go to a "Collect" buffer
+- **Stats Tracking**: Track total crops harvested, XP earned, and money earned
+- **Visual Growth Bars**: See exact growth progress for each crop
+
+**Supported Crops:**
+- Wheat (30s growth, 5x yield)
+- Carrots (40s growth, 3x yield)
+- Potatoes (40s growth, 4x yield)
+- Beetroots (50s growth, 2x yield)
+- Melons (60s growth, 4x yield)
+- Pumpkins (60s growth, 1x yield)
+- Nether Wart (75s growth, 3x yield)
 
 ### ⚔️ The Menagerie (Mob Farms)
 
@@ -61,13 +82,6 @@ Works **standalone** OR integrates with external economy mods:
 - **Custom Mods** - Implement `EconomyProvider` interface
 - **Standalone Mode** - Uses internal balance when no economy mod present
 
-### 🛠️ Simple Resource System
-
-- **Living Mobs** require Fodder (Wheat/Seeds) to produce resources
-- **Hostile Mobs** require Trophies (Rotten Flesh, Bones) to maintain spawn rates
-- **Iron Golems** require a one-time investment of Iron Blocks
-- **No Tools Required** - All production is automated!
-
 ## 🚀 Getting Started
 
 1. **Craft the Estate Ledger:**
@@ -78,13 +92,14 @@ Works **standalone** OR integrates with external economy mods:
 
 3. **Start Farming:**
    - Click on empty crop plots to plant crops
-   - Purchase mob pens with currency
-   - Add fodder and tools to produce resources
+   - Use "Plant All" to plant in all empty plots at once
+   - Watch your crops grow and harvest with "Harvest All"
+   - Use bonemeal to speed up growth!
 
 4. **Collect & Sell Resources:**
-   - Resources accumulate in the output buffer
-   - Click "Collect" to receive your items
+   - Click "Collect" to receive your harvested crops
    - Use the Sell tab or `/estate sell` to sell for money
+   - Use money to buy more plots and expand your farm!
 
 ## 📝 Commands
 
@@ -110,9 +125,7 @@ Configuration options are available in `EstateConfig.java`:
 - Mob pen costs
 - Production intervals
 - Upkeep settings (optional)
-- External economy integration (`USE_EXTERNAL_ECONOMY`)
-
-Sell prices are configured in `SellPrices.java`.
+- External economy integration
 
 ## 📦 Dependencies
 
@@ -121,73 +134,33 @@ Sell prices are configured in `SellPrices.java`.
 - Fabric API 0.141.1+1.21.11
 - **SGUI Library** 1.12.0+1.21.11 (included/bundled)
 
-## 🔗 Economy Mod Integration
+## 📜 Changelog
 
-Pocket Estate automatically detects and integrates with economy mods:
+### v1.2.0 - Major Farm Redesign
+- **Full-Screen Farm GUI**: New 7x3 grid layout showing 21 plots at once
+- **Increased Plot Limit**: Now supports up to 180 crop plots!
+- **Idle-Game Mechanics**: XP and money rewards for harvesting
+- **Plant All Feature**: Plant same crop in all empty plots
+- **Harvest All Feature**: Harvest all ready crops with one click
+- **Bonemeal Storage**: Store bonemeal and boost all crops at once
+- **Bonemeal from Inventory**: Right-click to add bonemeal from your inventory
+- **Compost Bin**: Passive bonemeal production over time
+- **Auto-Harvest Toggle**: Automatically harvest when crops are ready
+- **Stats Tracking**: Track harvests, XP earned, and money earned
+- **Glow Effects**: Visual indicators for ready crops and available actions
+- **Buy Plots Button**: Purchase new plots with left/right click options
 
-```java
-// Enable in EstateConfig.java
-public static boolean USE_EXTERNAL_ECONOMY = true;
-public static String EXTERNAL_ECONOMY_MOD = "multieconomy";
-```
-
-Supported mods:
-- **MultiEconomy** by bencrow11
-- **EasyEconomy** by Sumutiu
-
-For custom integration, implement `EconomyIntegration.EconomyProvider`:
-
-```java
-EconomyIntegration.registerProvider(new EconomyProvider() {
-    public long getBalance(UUID playerId) { /* ... */ }
-    public void addBalance(UUID playerId, long amount) { /* ... */ }
-    public boolean removeBalance(UUID playerId, long amount) { /* ... */ }
-    public String getName() { return "MyEconomyMod"; }
-});
-```
-
-## 📁 Project Structure
-
-```
-src/main/java/com/pocketestate/
-├── PocketEstate.java          # Main mod initializer
-├── command/
-│   └── EstateCommand.java     # /estate commands
-├── config/
-│   ├── EstateConfig.java      # Configuration options
-│   └── SellPrices.java        # Item sell prices
-├── currency/
-│   └── CurrencyManager.java   # Currency helpers
-├── economy/
-│   └── EconomyIntegration.java # External mod integration
-├── data/
-│   ├── DataManager.java       # NBT persistence
-│   ├── EstateManager.java     # Estate operations
-│   └── PlayerData.java        # Per-player data
-├── farm/
-│   ├── CropPlot.java          # Individual crop plot
-│   ├── CropType.java          # Crop type enum
-│   ├── MobPen.java            # Individual mob pen
-│   ├── PenType.java           # Pen type enum
-│   ├── VirtualCropManager.java
-│   └── VirtualMobManager.java
-├── gui/
-│   ├── EstateGui.java         # Main dashboard
-│   ├── FieldsGui.java         # Crop management
-│   ├── PensGui.java           # Mob pen management
-│   └── SellGui.java           # Resource selling
-│   ├── FieldsGui.java         # Crop management
-│   ├── PensGui.java           # Mob pen management
-│   └── EntityRenderHelper.java
-└── registry/
-    └── ModItems.java          # Item registration
-```
+### v1.1.0 - Initial Release
+- Basic crop farming with 54 plots
+- Mob pens for passive and hostile mob farming
+- Economy integration with MultiEconomy and EasyEconomy
+- Sell GUI for turning resources into money
 
 ## 🏗️ Building
 
-```bash
+`ash
 ./gradlew build
-```
+`
 
 The built JAR will be in `build/libs/`.
 
