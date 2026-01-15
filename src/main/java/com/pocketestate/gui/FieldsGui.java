@@ -453,48 +453,35 @@ public class FieldsGui extends SimpleGui {
         for (CropType crop : CropType.values()) {
             if (slotIdx >= cropSlots.length) break;
             
-            // Count seeds in inventory
-            int seedCount = countItemInInventory(player, crop.getSeedItem());
-            int emptyPlots = VirtualCropManager.getEmptyPlotCount(data);
-            
             setSlot(cropSlots[slotIdx], new GuiElementBuilder(crop.getSeedItem())
                 .setName(Component.literal("§a" + crop.getDisplayName()))
                 .addLoreLine(Component.literal("§7Yield: §e" + crop.getBaseYield() + "x " + crop.getHarvestItem().toString().replace("_", " ")))
                 .addLoreLine(Component.literal("§7Growth time: §e" + crop.getGrowthTimeSeconds() + "s"))
                 .addLoreLine(Component.literal(""))
-                .addLoreLine(Component.literal("§7Seeds in inventory: §e" + seedCount))
-                .addLoreLine(Component.literal(""))
                 .addLoreLine(selectedPlotIndex >= 0 
-                    ? Component.literal("§aClick to plant in plot #" + (selectedPlotIndex + 1))
-                    : Component.literal("§aClick to plant in §e" + Math.min(seedCount, emptyPlots) + "§a plots"))
+                    ? Component.literal("§aClick to plant")
+                    : Component.literal("§aClick to plant in all empty plots"))
                 .setCallback((index, type, action) -> {
                     if (selectedPlotIndex >= 0) {
-                        // Plant in single plot - consume seed from inventory
-                        if (consumeItemFromInventory(player, crop.getSeedItem(), 1)) {
-                            VirtualCropManager.plantCrop(data, selectedPlotIndex, crop);
-                            player.sendSystemMessage(Component.literal("§a§l[FARM] §rPlanted §e" + crop.getDisplayName() + "§r in plot #" + (selectedPlotIndex + 1)));
-                            player.playSound(SoundEvents.CROP_PLANTED, 0.5f, 1.0f);
-                        } else {
-                            player.sendSystemMessage(Component.literal("§c§l[FARM] §rNo seeds in inventory!"));
-                        }
+                        // Plant in single plot - FREE!
+                        VirtualCropManager.plantCrop(data, selectedPlotIndex, crop);
+                        player.sendSystemMessage(Component.literal("§a§l[FARM] §rPlanted §e" + crop.getDisplayName() + "§r in plot #" + (selectedPlotIndex + 1)));
+                        player.playSound(SoundEvents.CROP_PLANTED, 0.5f, 1.0f);
                     } else {
-                        // Plant all - consume seeds
-                        int maxToPlant = countItemInInventory(player, crop.getSeedItem());
+                        // Plant all - FREE!
                         int planted = 0;
-                        for (int i = 0; i < data.getUnlockedCropSlots() && planted < maxToPlant; i++) {
+                        for (int i = 0; i < data.getUnlockedCropSlots(); i++) {
                             CropPlot plot = data.getCropPlot(i);
                             if (plot != null && plot.getCropType() == null) {
-                                if (consumeItemFromInventory(player, crop.getSeedItem(), 1)) {
-                                    plot.plant(crop);
-                                    planted++;
-                                }
+                                plot.plant(crop);
+                                planted++;
                             }
                         }
                         if (planted > 0) {
                             player.sendSystemMessage(Component.literal("§a§l[FARM] §rPlanted §e" + crop.getDisplayName() + "§r in §e" + planted + " plots§r!"));
                             player.playSound(SoundEvents.CROP_PLANTED, 0.7f, 1.0f);
                         } else {
-                            player.sendSystemMessage(Component.literal("§c§l[FARM] §rNo seeds or empty plots!"));
+                            player.sendSystemMessage(Component.literal("§c§l[FARM] §rNo empty plots!"));
                         }
                     }
                     showCropSelector = false;
@@ -543,22 +530,5 @@ public class FieldsGui extends SimpleGui {
             }
         }
         return transferred;
-    }
-    
-    /**
-     * Consume items from player inventory
-     * @return true if successfully consumed
-     */
-    private boolean consumeItemFromInventory(ServerPlayer player, Item item, int amount) {
-        int remaining = amount;
-        for (int i = 0; i < player.getInventory().getContainerSize() && remaining > 0; i++) {
-            ItemStack stack = player.getInventory().getItem(i);
-            if (stack.getItem() == item) {
-                int toTake = Math.min(stack.getCount(), remaining);
-                stack.shrink(toTake);
-                remaining -= toTake;
-            }
-        }
-        return remaining == 0;
     }
 }
