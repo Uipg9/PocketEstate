@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "pocketestate",
+  "version": "${version}",
+  "name": "Pocket Estate",
+  "description": "A Vanilla Plus management mod for virtual agricultural and industrial complex management through a beautiful GUI.",
+  "authors": ["Uipg9"],
+  "contact": {
+    "homepage": "https://github.com/Uipg9/pocketestate",
+    "sources": "https://github.com/Uipg9/pocketestate"
+  },
+  "license": "MIT",
+  "icon": "assets/pocketestate/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.pocketestate.PocketEstate"]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.1",
+    "fabric-api": "*",
+    "minecraft": "~1.21.11",
+    "java": ">=21"
+  }
+}

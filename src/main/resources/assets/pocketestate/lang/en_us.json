@@ -1,0 +1,35 @@
+{
+  "item.pocketestate.estate_ledger": "Estate Ledger",
+  "item.pocketestate.estate_ledger.tooltip": "Right-click to manage your Pocket Estate",
+  
+  "gui.pocketestate.title": "Pocket Estate",
+  "gui.pocketestate.overview": "Overview",
+  "gui.pocketestate.fields": "Fields",
+  "gui.pocketestate.pens": "Pens",
+  "gui.pocketestate.foundry": "Foundry",
+  
+  "tab.pocketestate.overview": "Overview",
+  "tab.pocketestate.fields": "Crops & Fields",
+  "tab.pocketestate.pens": "Mob Pens",
+  "tab.pocketestate.foundry": "Iron Foundry",
+  
+  "pen.pocketestate.sheep": "Sheep Pasture",
+  "pen.pocketestate.cow": "Cattle Ranch",
+  "pen.pocketestate.chicken": "Chicken Coop",
+  "pen.pocketestate.spider": "Spider Dungeon",
+  "pen.pocketestate.zombie": "Zombie Dungeon",
+  "pen.pocketestate.skeleton": "Skeleton Dungeon",
+  "pen.pocketestate.iron_golem": "Iron Foundry",
+  
+  "crop.pocketestate.wheat": "Wheat Field",
+  "crop.pocketestate.carrot": "Carrot Field",
+  "crop.pocketestate.potato": "Potato Field",
+  "crop.pocketestate.beetroot": "Beetroot Field",
+  
+  "message.pocketestate.insufficient_funds": "Insufficient funds! You need %s more.",
+  "message.pocketestate.purchased": "Purchased %s for %s!",
+  "message.pocketestate.collected": "Collected %s!",
+  "message.pocketestate.tool_broken": "Your tool has broken!",
+  "message.pocketestate.no_tool": "Insert a tool to produce resources!",
+  "message.pocketestate.need_fodder": "Mobs need fodder to produce resources!"
+}

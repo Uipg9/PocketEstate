@@ -1,0 +1,32 @@
+# Gradle
+.gradle/
+build/
+out/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.launch
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Fabric
+run/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Mod outputs
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+
+# Local files
+local.properties

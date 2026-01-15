@@ -1,0 +1,56 @@
+plugins {
+    id 'fabric-loom' version '1.14-SNAPSHOT'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Nucleoid'
+        url = 'https://maven.nucleoid.xyz/'
+    }
+}
+
+loom {
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    
+    // Use Mojang Official Mappings
+    mappings loom.officialMojangMappings()
+    
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    
+    // Use Fabric API  
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    
+    // SGui library for inventory GUIs (compatible with Minecraft 1.21.11)
+    include(modImplementation("eu.pb4:sgui:1.12.0+1.21.11"))
+}
+
+processResources {
+    inputs.property "version", project.version
+    
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.archivesBaseName}"}
+    }
+}
