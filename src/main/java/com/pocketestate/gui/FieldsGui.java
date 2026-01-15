@@ -122,13 +122,14 @@ public class FieldsGui extends SimpleGui {
                     
                     builder.setCallback((index, type, action) -> {
                         if (type.isLeft) {
-                            // Harvest and replant
+                            // Harvest and replant - add to output buffer for selling
                             ItemStack harvested = VirtualCropManager.harvestCrop(player.getUUID(), plotIndex, true);
                             if (harvested != null && !harvested.isEmpty()) {
-                                player.addItem(harvested);
+                                // Add to output buffer (can be sold or collected)
+                                PocketEstate.dataManager.getPlayerData(player.getUUID()).addToOutput(harvested);
                                 player.sendSystemMessage(Component.literal(
                                     "§a§l[FIELDS] §rHarvested §e" + harvested.getCount() + "x " + 
-                                    harvested.getHoverName().getString() + "§r!"));
+                                    harvested.getHoverName().getString() + "§r! §7(Use /sell or Collect)"));
                             }
                             buildGui();
                         } else if (type.isRight) {
@@ -167,10 +168,11 @@ public class FieldsGui extends SimpleGui {
                     var harvested = VirtualCropManager.harvestAll(player.getUUID(), true);
                     int total = harvested.stream().mapToInt(ItemStack::getCount).sum();
                     for (var stack : harvested) {
-                        player.addItem(stack);
+                        // Add to output buffer (can be sold or collected)
+                        PocketEstate.dataManager.getPlayerData(player.getUUID()).addToOutput(stack);
                     }
                     player.sendSystemMessage(Component.literal(
-                        "§a§l[FIELDS] §rHarvested all crops! Total: §e" + total + "§r items"));
+                        "§a§l[FIELDS] §rHarvested all crops! Total: §e" + total + "§r items §7(Use /sell or Collect)"));
                     buildGui();
                 }
             })
